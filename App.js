@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import {
   AppRegistry,
   StyleSheet,
@@ -16,6 +17,11 @@ export default class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { text: "aaaaaaa" };
+  }
+  async componentDidMount() {
+    console.info("componentDidMount");
+    const result = await axios.get("http://httpbin.org/");
+    console.info("result", result);
   }
   render() {
     const pic = {
