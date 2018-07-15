@@ -5,7 +5,9 @@ import {
   Text,
   TextInput,
   View,
-  Image
+  Image,
+  Button,
+  Alert
 } from "react-native";
 
 export default class App extends React.Component {
@@ -27,6 +29,12 @@ export default class App extends React.Component {
         />
         <Text>{this.state.text}</Text>
         <Image source={pic} style={{ width: 193, height: 110 }} />
+        <Button
+          onPress={() => {
+            Alert.alert("Button Pressed");
+          }}
+          title="Press Me"
+        />
       </View>
     );
   }
