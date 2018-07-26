@@ -40,6 +40,9 @@
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		F32F95F621098C5700ECB708 /* CalendarManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32F95F521098C5700ECB708 /* CalendarManager.swift */; };
 		F32F95F921098CAA00ECB708 /* CalendarManagerBridge.m in Sources */ = {isa = PBXBuildFile; fileRef = F32F95F821098CAA00ECB708 /* CalendarManagerBridge.m */; };
+		F32F95FB2109A6BF00ECB708 /* SampleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32F95FA2109A6BF00ECB708 /* SampleView.swift */; };
+		F32F95FD2109A6EE00ECB708 /* SampleViewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F32F95FC2109A6EE00ECB708 /* SampleViewManager.swift */; };
+		F32F95FF2109A71E00ECB708 /* SampleViewModule.m in Sources */ = {isa = PBXBuildFile; fileRef = F32F95FE2109A71E00ECB708 /* SampleViewModule.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -348,6 +351,9 @@
 		F32F95F521098C5700ECB708 /* CalendarManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarManager.swift; sourceTree = "<group>"; };
 		F32F95F721098C8100ECB708 /* spikereactnative-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "spikereactnative-Bridging-Header.h"; sourceTree = "<group>"; };
 		F32F95F821098CAA00ECB708 /* CalendarManagerBridge.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CalendarManagerBridge.m; sourceTree = "<group>"; };
+		F32F95FA2109A6BF00ECB708 /* SampleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleView.swift; sourceTree = "<group>"; };
+		F32F95FC2109A6EE00ECB708 /* SampleViewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleViewManager.swift; sourceTree = "<group>"; };
+		F32F95FE2109A71E00ECB708 /* SampleViewModule.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SampleViewModule.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -578,6 +584,9 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				F32F95FE2109A71E00ECB708 /* SampleViewModule.m */,
+				F32F95FC2109A6EE00ECB708 /* SampleViewManager.swift */,
+				F32F95FA2109A6BF00ECB708 /* SampleView.swift */,
 				F32F95F721098C8100ECB708 /* spikereactnative-Bridging-Header.h */,
 				F32F95F521098C5700ECB708 /* CalendarManager.swift */,
 				F32F95F821098CAA00ECB708 /* CalendarManagerBridge.m */,
@@ -1125,10 +1134,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F32F95FB2109A6BF00ECB708 /* SampleView.swift in Sources */,
 				F32F95F921098CAA00ECB708 /* CalendarManagerBridge.m in Sources */,
 				F32F95F621098C5700ECB708 /* CalendarManager.swift in Sources */,
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				F32F95FD2109A6EE00ECB708 /* SampleViewManager.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
+				F32F95FF2109A71E00ECB708 /* SampleViewModule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
