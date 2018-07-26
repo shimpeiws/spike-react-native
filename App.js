@@ -16,6 +16,8 @@ import {
   NativeEventEmitter
 } from "react-native";
 
+import SampleView from "./SampleView.ios.js";
+
 const { CalendarManager } = NativeModules;
 console.log("Calendar Manager", NativeModules.CalendarManager);
 const calendarManagerEmitter = new NativeEventEmitter(CalendarManager);
@@ -52,32 +54,7 @@ export default class App extends React.Component {
     };
     return (
       <View style={styles.container}>
-        {/* <Camera style={{ flex: 1 }} type={this.state.type}> */}
-        <View
-          style={{
-            flex: 1,
-            backgroundColor: "transparent",
-            flexDirection: "row"
-          }}
-        >
-          <TouchableOpacity
-            style={{
-              flex: 0.1,
-              alignSelf: "flex-end",
-              alignItems: "center"
-            }}
-            onPress={() => {
-              Alert.alert("Touched");
-            }}
-          >
-            <Text style={{ fontSize: 18, marginBottom: 10, color: "white" }}>
-              {" "}
-              Flip{" "}
-            </Text>
-          </TouchableOpacity>
-        </View>
-        {/* </Camera> */}
-        {/* <ScrollView> */}
+        <SampleView />
         <FlatList
           data={[
             { key: "Devin" },
@@ -105,8 +82,8 @@ export default class App extends React.Component {
           title="Press Me"
         />
       </View>
-      // </ScrollView>
     );
+    // </ScrollView>
   }
 }
 
