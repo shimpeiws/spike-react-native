@@ -11,8 +11,26 @@ import {
   Alert,
   ScrollView,
   FlatList,
-  TouchableOpacity
+  TouchableOpacity,
+  NativeModules,
+  NativeEventEmitter
 } from "react-native";
+
+const { CalendarManager } = NativeModules;
+console.log("Calendar Manager", NativeModules.CalendarManager);
+const calendarManagerEmitter = new NativeEventEmitter(CalendarManager);
+const subscription = calendarManagerEmitter.addListener(
+  "EventReminder",
+  reminder => {
+    console.log("EVENT");
+    console.log("name: " + reminder.name);
+    console.log("location: " + reminder.location);
+    console.log("date: " + reminder.date);
+  }
+);
+NativeModules.CalendarManager.addEvent("One", "Two", 3, function(o) {
+  console.log("In Callback", o);
+});
 
 export default class App extends React.Component {
   constructor(props) {
