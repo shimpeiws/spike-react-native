@@ -1,1 +1,0 @@
-# spike-react-native
