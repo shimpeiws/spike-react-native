@@ -21,21 +21,35 @@ class CameraView: UIView {
     super.init(frame: frame)
 
     session = AVCaptureSession()
-    let device = AVCaptureDevice.defaultDevice(withDeviceType: .builtInWideAngleCamera,
-                                                mediaType: AVMediaTypeVideo,
-                                                position: .back)
-    let videoInput = try! AVCaptureDeviceInput.init(device: device)
+    session!.sessionPreset = AVCaptureSessionPreset1920x1080
     
-    session!.addInput(videoInput)
-
-    photoOutput = AVCapturePhotoOutput()
-    session!.addOutput(photoOutput)
-
-    videoLayer = AVCaptureVideoPreviewLayer.init(session: session)
-    videoLayer?.frame = self.bounds
-    videoLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
+    let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
     
-    self.layer.addSublayer(videoLayer!)
+    do {
+      let videoInput = try AVCaptureDeviceInput.init(device: device)
+      if (session!.canAddInput(videoInput)) {
+        photoOutput = AVCapturePhotoOutput()
+        session!.addOutput(photoOutput)
+        
+        videoLayer = AVCaptureVideoPreviewLayer.init(session: session)
+        videoLayer?.frame = self.bounds
+        videoLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
+        
+        self.layer.addSublayer(videoLayer!)
+      } else {
+        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100,
+                                          height: 50))
+        label.text = "This is Swift"
+        self.addSubview(label)
+      }
+    }
+    catch {
+      print(error)
+      let label = UILabel(frame: CGRect(x: 0, y: 0, width: 300,
+                                        height: 50))
+      label.text = "This is \(error)"
+      self.addSubview(label)
+    }
   }
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
