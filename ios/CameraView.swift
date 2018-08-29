@@ -12,51 +12,39 @@ import UIKit
 import AVFoundation
 
 class CameraView: UIView {
+  var session: AVCaptureSession?
+  var photoOutput: AVCapturePhotoOutput?
+  var camera: AVCaptureDevice?
+  var videoLayer: AVCaptureVideoPreviewLayer?
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
 
-    let captureSesssion = AVCaptureSession()
-    let stillImageOutput = AVCapturePhotoOutput()
+    session = AVCaptureSession()
+    let device = AVCaptureDevice.defaultDevice(withDeviceType: .builtInWideAngleCamera,
+                                                mediaType: AVMediaTypeVideo,
+                                                position: .back)
+    let videoInput = try! AVCaptureDeviceInput.init(device: device)
     
-    captureSesssion.sessionPreset = AVCaptureSessionPreset1920x1080 // 解像度の設定
+    session!.addInput(videoInput)
+
+    photoOutput = AVCapturePhotoOutput()
+    session!.addOutput(photoOutput)
+
+    videoLayer = AVCaptureVideoPreviewLayer.init(session: session)
+    videoLayer?.frame = self.bounds
+    videoLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
     
-    let device = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo)
-    
-    
-    do {
-      let input = try AVCaptureDeviceInput(device: device)
-      
-      // 入力
-      if (captureSesssion.canAddInput(input)) {
-        captureSesssion.addInput(input)
-        
-        // 出力
-        if (captureSesssion.canAddOutput(stillImageOutput)) {
-          captureSesssion.addOutput(stillImageOutput)
-          captureSesssion.startRunning() // カメラ起動
-          
-          let previewLayer = AVCaptureVideoPreviewLayer(session: captureSesssion)
-          previewLayer?.videoGravity = AVLayerVideoGravityResizeAspect // アスペクトフィット
-          previewLayer?.connection.videoOrientation = AVCaptureVideoOrientation.portrait // カメラの向き
-          
-          self.layer.addSublayer(previewLayer!)
-          
-          // ビューのサイズの調整
-          previewLayer?.position = CGPoint(x: self.frame.width / 2, y: self.frame.height / 2)
-          previewLayer?.bounds = self.frame
-        }
-      } else {
-        let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100,
-                                          height: 50))
-        label.text = "Camera View"
-        self.addSubview(label)
-      }
-    }
-    catch {
-      print(error)
-    }
+    self.layer.addSublayer(videoLayer!)
   }
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  func setupCamera() {
+    guard let camera = AVCaptureDevice.defaultDevice(withMediaType: AVMediaTypeVideo) else {
+      Swift.print("failed to get a camera device")
+      return
+    }
+    self.camera = camera
   }
 }
