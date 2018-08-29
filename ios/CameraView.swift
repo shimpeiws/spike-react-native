@@ -28,18 +28,31 @@ class CameraView: UIView {
     do {
       let videoInput = try AVCaptureDeviceInput.init(device: device)
       if (session!.canAddInput(videoInput)) {
+        session!.addInput(videoInput)
         photoOutput = AVCapturePhotoOutput()
-        session!.addOutput(photoOutput)
-        
-        videoLayer = AVCaptureVideoPreviewLayer.init(session: session)
-        videoLayer?.frame = self.bounds
-        videoLayer?.videoGravity = AVLayerVideoGravityResizeAspectFill
-        
-        self.layer.addSublayer(videoLayer!)
+        if (session!.canAddOutput(photoOutput)) {
+          session!.addOutput(photoOutput)
+          
+          let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 200,
+                                                    height: 500))
+          let captureVideoLayer: AVCaptureVideoPreviewLayer = AVCaptureVideoPreviewLayer.init(session: session)
+          captureVideoLayer.frame = imageView.bounds
+          captureVideoLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+          imageView.layer.addSublayer(captureVideoLayer)
+          
+          self.addSubview(imageView)
+          
+          session!.startRunning()
+        } else {
+          let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100,
+                                            height: 50))
+          label.text = "Can't add output"
+          self.addSubview(label)
+        }
       } else {
         let label = UILabel(frame: CGRect(x: 0, y: 0, width: 100,
                                           height: 50))
-        label.text = "This is Swift"
+        label.text = "Can't add input"
         self.addSubview(label)
       }
     }
